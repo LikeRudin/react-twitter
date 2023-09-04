@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "@/routers/Home";
 import Auth from "@/routers/Auth";
 
@@ -7,7 +7,7 @@ const AppRouter = ({isLoggedIn = false}) => {
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
-        <Router>
+        <BrowserRouter>
           <Routes>
             {isLoggedIn ? (
               <Route path="/" element={<Home />} />
@@ -15,7 +15,7 @@ const AppRouter = ({isLoggedIn = false}) => {
               <Route path="/" element={<Auth />} />
             )}
           </Routes>
-        </Router>
+        </BrowserRouter>
       );
 }
 
