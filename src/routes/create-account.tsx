@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from "@/firebase.config";
 import { useNavigate } from "react-router-dom";
+import { FirebaseError } from "firebase/app";
 
 const Title = styled.h1`
 font-size: 42px;
@@ -80,9 +81,14 @@ export const CreateAccount = () => {
             });
             navigate("/");
         }
-        catch (error) {
-            console.log(error);
-            setError(error);
+        catch (e) {
+            if (e instanceof FirebaseError){
+            const  { code, message} = e;
+            console.log(`${code}, ${message}`);
+            setError(`${code}:${message}`);
+        } else { 
+            console.log(e);
+        }
         }
         finally{
             setIsLoading(false);
