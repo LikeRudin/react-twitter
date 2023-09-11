@@ -1,22 +1,11 @@
-import styled from "styled-components"
 import {auth} from "@/firebase.config";
-
-const Button = styled.button`
-width: 250px;
-height: 80px;
-`
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
-    const logout = () => {
-        console.log(auth.currentUser);
-        auth.signOut();
-        console.log(auth.currentUser);
-    }
+    const navigate = useNavigate();
     return (
         <>
-            <span> "this is home"</span>
-            <Button onClick={logout}>Log Out!</Button>
+        {auth.currentUser !== null? <h1>you are logged in!</h1>: navigate("/login")}   
         </>
     )
 }
-
