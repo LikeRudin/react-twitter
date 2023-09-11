@@ -1,4 +1,4 @@
-const Home = () => {
+export const Home = () => {
     return (
         <>
             <span> "this is home"</span>
@@ -6,4 +6,3 @@ const Home = () => {
     )
 }
 
-export default Home;
