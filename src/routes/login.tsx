@@ -4,6 +4,8 @@ import { auth } from "@/firebase.config";
 import { FirebaseError } from "firebase/app";
 import React, { useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
+import GithubButton from "@/components/github-button";
+
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -74,10 +76,11 @@ export const Login = () => {
                     type="submit"
                     value={isLoading? "Loading...": "Login with Email"}/>
             </Form>
+            {error? <Error/> : null}
             <Switcher>
                 Don't have account yet? <Link to="/create-account">Create Account &rarr;</Link>
             </Switcher>
-            {error? <Error/> : null}
+            <GithubButton />
         </Wrapper>
         </>
     )
