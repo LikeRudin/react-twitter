@@ -8,7 +8,9 @@ height: 80px;
 
 export const Home = () => {
     const logout = () => {
+        console.log(auth.currentUser);
         auth.signOut();
+        console.log(auth.currentUser);
     }
     return (
         <>
