@@ -18,7 +18,6 @@ const firebaseConfig = {
   appId: VITE_APP_ID,
 };
 
-
 const firebaseApp = initializeApp(firebaseConfig);
 
 export const auth = getAuth(firebaseApp);
