@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, styled } from "styled-components";
 import router from "./Router";
 import reset from "styled-reset";
 import { useEffect, useState } from "react";
@@ -18,6 +18,13 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+`;
+
+
 const App = () => {
   const [isLoading, setIsLoading]= useState(true);
 
@@ -29,10 +36,12 @@ const App = () => {
     init();
   });
 
-  return (<>
+  return (
+  <Wrapper>
     <GlobalStyles/>
     {isLoading? <LoadingScreen/> :<RouterProvider router={router}/> }
-    </>)
+  </Wrapper>
+  )
 }
 
 export default App;
