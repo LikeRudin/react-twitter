@@ -2,8 +2,9 @@ import {styled} from "styled-components";
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import {auth} from "@/firebase.config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
+
 
 const Title = styled.h1`
 font-size: 42px;
@@ -44,6 +45,15 @@ const Error = styled.span`
   font-weight: 600;
   color: tomato;
 `;
+
+const Switcher = styled.span`
+  margin-top: 20px;
+  a {
+    color: #1d9bf0;
+  }
+`;
+
+
 export const CreateAccount = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -120,6 +130,9 @@ export const CreateAccount = () => {
                 type="submit"
                 value={isLoading? "Loading...": "Create Account"}/>
             </Form>
+            <Switcher>
+                Already have an account? <Link to="/login">Log in &rarr;</Link>
+            </Switcher>
             {error !== ""? <Error>{error}</Error>: null}
         </Wrapper>
     )

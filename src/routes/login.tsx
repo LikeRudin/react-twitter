@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase.config";
 import { FirebaseError } from "firebase/app";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Title = styled.h1`
 font-size: 42px;
@@ -45,6 +46,13 @@ const Error = styled.span`
   color: tomato;
 `;
 
+const Switcher = styled.span`
+  margin-top: 20px;
+  a {
+    color: #1d9bf0;
+  }
+`;
+
 export const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
@@ -54,7 +62,7 @@ export const Login = () => {
     const onSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (email === "" || password === "") return;
+        if (isLoading || email === "" || password === "") return;
         try{
             setIsLoading(true);
             const credentials = await signInWithEmailAndPassword(auth, email, password);
@@ -111,6 +119,9 @@ export const Login = () => {
                     type="submit"
                     value={isLoading? "Loading...": "Login with Email"}/>
             </Form>
+            <Switcher>
+                Don't have account yet? <Link to="/create-account">Create Account &rarr;</Link>
+            </Switcher>
             {error? <Error/> : null}
         </Wrapper>
         </>
