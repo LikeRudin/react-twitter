@@ -2,6 +2,8 @@ import { RouterProvider } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import router from "./Router";
 import reset from "styled-reset";
+import { useEffect, useState } from "react";
+import LoadingScreen from "./components/loading-screen";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -16,9 +18,20 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const App = () => {
+  const [isLoading, setIsLoading]= useState(true);
+
+  const init = async() => {
+    setTimeout(()=> {
+      setIsLoading(false);
+    }, 2000)
+  }
+  useEffect(()=>{
+    init();
+  });
+
   return (<>
     <GlobalStyles/>
-    <RouterProvider router={router}/>
+    {isLoading? <LoadingScreen/> :<RouterProvider router={router}/> }
     </>)
 }
 
