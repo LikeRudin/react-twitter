@@ -4,6 +4,7 @@ import router from "./Router";
 import reset from "styled-reset";
 import { useEffect, useState } from "react";
 import LoadingScreen from "./components/loading-screen";
+import {auth} from "./firebase.config.ts";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
@@ -21,9 +22,8 @@ const App = () => {
   const [isLoading, setIsLoading]= useState(true);
 
   const init = async() => {
-    setTimeout(()=> {
-      setIsLoading(false);
-    }, 2000)
+    await auth.authStateReady()
+    setIsLoading(false);
   }
   useEffect(()=>{
     init();
