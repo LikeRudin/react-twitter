@@ -3,9 +3,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase.config";
 import { FirebaseError } from "firebase/app";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
 export const Login = () => {
+    const navigate = useNavigate();
+
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,8 +21,9 @@ export const Login = () => {
             setIsLoading(true);
             const credentials = await signInWithEmailAndPassword(auth, email, password);
             const user = credentials.user;
-            console.log("logged in userdata:");
-            console.log(user);
+            if(user){
+                navigate("/")
+            }
 
         }
         catch (e) {
